@@ -1,0 +1,86 @@
+<div class="containter-fluid">
+  <ng-template [ngIf]="fileSizeError">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Atenção!</strong> Número de caracteres do arquivo:
+      <strong>{{ charCount }}</strong
+      >. Número max. permitido: <strong>10.000</strong>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </ng-template>
+
+  <div class="container" style="margin-top: 50px; max-width: 500px">
+    <p style="text-align: center; margin-bottom: 0">
+      <a href="/"><img src="/assets/orbit.png" style="width: 200px" /></a>
+    </p>
+    <h2 style="text-align: center; margin-bottom: 10px; font-weight: bold">
+      Orbit Ambev Reporting
+    </h2>
+    <form>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="file-text-field"
+          name="file-text-field"
+          placeholder="Faça o upload do arquivo .txt"
+          disabled
+          [(ngModel)]="fileName"
+        />
+      </div>
+      <div style="text-align: center">
+        <input
+          type="file"
+          id="upload_input"
+          (change)="onFileSelected($event)"
+          style="display: none"
+          accept="text/plain"
+        />
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          onclick="document.getElementById('upload_input').click()"
+        >
+          Upload
+        </button>
+
+        <p></p>
+
+        <ng-template [ngIf]="fileUploaded">
+          <ng-template [ngIf]="!loading">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="sendToBackend()"
+            >
+              Gerar Relatório!
+            </button>
+          </ng-template>
+        </ng-template>
+
+        <ng-template [ngIf]="loading">
+          <h5>Gerando relatório, aguarde...</h5>
+        </ng-template>
+        <p></p>
+
+        <ng-template [ngIf]="errorMessage != ''">
+          <h5>{{ errorMessage }}</h5>
+        </ng-template>
+        <p></p>
+
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+
+        <h5 style="text-align: justify">{{ reportText }}</h5>
+      </div>
+    </form>
+  </div>
+</div>

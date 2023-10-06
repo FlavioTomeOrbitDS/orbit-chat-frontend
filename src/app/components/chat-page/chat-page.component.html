@@ -1,0 +1,65 @@
+<div class="container">
+  <p style="text-align: center; margin-bottom: 0">
+    <a href="/"><img src="/assets/orbit.png" style="width: 200px" /></a>
+  </p>
+
+  <div
+    class="row"
+    style="
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    "
+  >
+    <div class="col-11" style="padding-bottom: 20px; padding-right: 0">
+      <label for="exampleFormControlTextarea1"></label>
+      <textarea
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        name="exampleFormControlTextarea1"
+        rows="1"
+        placeholder="Insira o texto..."
+        [(ngModel)]="promptText"
+      ></textarea>
+    </div>
+    <div class="col-1" style="padding-left: 0">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="sendPrompt()"
+        style="width: 100%"
+      >
+        Go!
+      </button>
+    </div>
+  </div>
+  <p></p>
+
+  <div
+    *ngIf="combinedList.length > 1"
+    style="box-shadow: 5px 5px 5px 1px lightblue"
+  >
+    <!-- <div *ngIf="promptText != ''" style="background-color: lightgray">
+      {{ promptText }}
+    </div>
+     -->
+    <div *ngIf="chatText != ''" style="background-color: whitesmoke">
+      {{ chatText }}
+    </div>
+
+    <!-- <div
+      *ngFor="let item of combinedList; let i = index"
+      style="padding: 10px 10px 20px 10px"
+      [ngStyle]="{
+        'background-color': i % 2 == 0 ? 'lightgray' : 'whitesmoke',
+        'text-align': i % 2 == 0 ? 'left' : 'right'
+      }"
+    >
+      {{ item }}
+    </div> -->
+  </div>
+  <div style="text-align: center; padding-top: 20px" *ngIf="loading == true">
+    <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+  </div>
+  <p></p>
+</div>
